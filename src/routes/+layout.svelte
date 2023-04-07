@@ -3,7 +3,7 @@
 	aria-label="Third navbar example"
 >
 	<div class="container-fluid">
-		<a class="navbar-brand" href="/">Contact Form</a>
+		<a class="navbar-brand" href="/">TryContact</a>
 		<button
 			class="navbar-toggler"
 			type="button"
@@ -21,6 +21,13 @@
 				<li class="nav-item">
 					<a class="nav-link active" aria-current="page" href="/"
 						>Home</a
+					>
+				</li>
+				<li class="nav-item">
+					<a
+						class="nav-link active"
+						aria-current="page"
+						href="/contact">Contact</a
 					>
 				</li>
 				<!-- <li class="nav-item">
@@ -60,3 +67,4 @@
 		</div>
 	</div>
 </nav>
+<slot />
