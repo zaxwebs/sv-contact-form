@@ -1,4 +1,5 @@
 <script>
+	import { enhance } from '$app/forms'
 	export let form;
 </script>
 
@@ -8,7 +9,7 @@
 	{#if form?.success}
 		<div class="alert alert-success" role="alert">Great! We'll get back soon.</div>
 	{/if}
-	<form method="POST" action="/contact">
+	<form method="POST" action="/contact" use:enhance>
 		<div class="mb-3">
 			<label for="name" class="form-label">Name</label>
 			<input
