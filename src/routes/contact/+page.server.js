@@ -8,33 +8,18 @@ export const actions = {
 		const name = data.get('name');
 		const email = data.get('email');
 		const message = data.get('message');
-		const terms = data.get('terms');
 
 		const formSchema = z.object({
-			name: z.string().min(2).max(50),
-			email: z.string().email(),
-			message: z.string().min(10).max(500),
-			terms: z.boolean().refine(value => value === true, {
-				message: "Terms must be accepted"
-			})
+			name: z.string({ required_error: "Name is required" }).min(1, { message: "Name is required" }),
+			email: z.string().min(1, { message: "Email is required" }).email({ message: "Please enter a valid email" }),
+			message: z.string({ required_error: "Message is required" }).min(1, { message: "Message is required" }),
 		});
 
-		// Validate form data against the schema
-		const validateForm = (formData) => {
-			try {
-				formSchema.parse(formData);
-				return { isValid: true, errors: null };
-			} catch (error) {
-				return { isValid: false, errors: error.message };
-			}
-		};
-
-		const validationResult = validateForm({ name, email, message, terms });
-
-		if (!validationResult.isValid) {
-			return fail(400, { errors: validationResult.errors })
-		} else {
-			console.error("Form data is invalid:", validationResult.error);
+		try {
+			formSchema.parse({ name, email, message });
+		} catch (e) {
+			console.log(e.flatten())
+			return fail(400, { ...e.flatten() })
 		}
 
 		return { success: true };

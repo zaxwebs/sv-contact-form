@@ -8,13 +8,20 @@
 	{#if form?.success}
 		<div class="alert alert-success" role="alert">Great! We'll get back soon.</div>
 	{/if}
-	{#if form?.errors}
-		<div class="alert alert-danger" role="alert"><pre>{form?.errors}</pre></div>
-	{/if}
 	<form method="POST" action="/contact">
 		<div class="mb-3">
 			<label for="name" class="form-label">Name</label>
-			<input id="name" type="text" name="name" class="form-control" value={form?.name ?? ''} />
+			<input
+				id="name"
+				type="text"
+				name="name"
+				class="form-control"
+				class:is-invalid={form?.fieldErrors?.name}
+				value={form?.name ?? ''}
+			/>
+			{#if form?.fieldErrors?.name}
+				<div class="invalid-feedback">{form?.fieldErrors?.name[0]}</div>
+			{/if}
 		</div>
 		<div class="mb-3">
 			<label for="email" class="form-label">Email address</label>
@@ -25,20 +32,25 @@
 				id="email"
 				aria-describedby="emailHelp"
 				value={form?.email ?? ''}
+				class:is-invalid={form?.fieldErrors?.email}
 			/>
+			{#if form?.fieldErrors?.email}
+				<div class="invalid-feedback">{form?.fieldErrors?.email[0]}</div>
+			{/if}
 			<div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
 		</div>
 		<div class="mb-3">
 			<label for="message" class="form-label">Message</label>
-			<textarea name="message" class="form-control" id="message" rows="3"
-				>{form?.message ?? ''}</textarea
+			<textarea
+				name="message"
+				class="form-control"
+				id="message"
+				rows="3"
+				class:is-invalid={form?.fieldErrors?.message}>{form?.message ?? ''}</textarea
 			>
-		</div>
-		<div class="mb-3 form-check">
-			<input type="checkbox" class="form-check-input" id="terms" name="terms" />
-			<label class="form-check-label" for="terms">
-				I agree with the terms and conditions and privacy policy.
-			</label>
+			{#if form?.fieldErrors?.message}
+				<div class="invalid-feedback">{form?.fieldErrors?.message[0]}</div>
+			{/if}
 		</div>
 		<button type="submit" class="btn btn-primary">Send Message</button>
 	</form>
