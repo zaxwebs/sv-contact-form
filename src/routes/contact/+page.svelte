@@ -8,10 +8,13 @@
 	{#if form?.success}
 		<div class="alert alert-success" role="alert">Great! We'll get back soon.</div>
 	{/if}
+	{#if form?.error}
+		<div class="alert alert-danger" role="alert">{form?.error}</div>
+	{/if}
 	<form method="POST" action="/contact">
 		<div class="mb-3">
 			<label for="name" class="form-label">Name</label>
-			<input id="name" type="text" name="name" class="form-control" />
+			<input id="name" type="text" name="name" class="form-control" value={form?.name ?? ''} />
 		</div>
 		<div class="mb-3">
 			<label for="email" class="form-label">Email address</label>
