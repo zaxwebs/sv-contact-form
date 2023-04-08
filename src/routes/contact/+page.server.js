@@ -7,7 +7,7 @@ export const actions = {
 		const message = data.get('message');
 		const terms = data.get('terms');
 
-		console.log(name, email, message);
+		console.log(name, email, message, terms);
 
 		return { success: true };
 	}
