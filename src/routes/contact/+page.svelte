@@ -8,8 +8,8 @@
 	{#if form?.success}
 		<div class="alert alert-success" role="alert">Great! We'll get back soon.</div>
 	{/if}
-	{#if form?.error}
-		<div class="alert alert-danger" role="alert">{form?.error}</div>
+	{#if form?.errors}
+		<div class="alert alert-danger" role="alert"><pre>{form?.errors}</pre></div>
 	{/if}
 	<form method="POST" action="/contact">
 		<div class="mb-3">
@@ -24,12 +24,15 @@
 				class="form-control"
 				id="email"
 				aria-describedby="emailHelp"
+				value={form?.email ?? ''}
 			/>
 			<div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
 		</div>
 		<div class="mb-3">
 			<label for="message" class="form-label">Message</label>
-			<textarea name="message" class="form-control" id="message" rows="3" />
+			<textarea name="message" class="form-control" id="message" rows="3"
+				>{form?.message ?? ''}</textarea
+			>
 		</div>
 		<div class="mb-3 form-check">
 			<input type="checkbox" class="form-check-input" id="terms" name="terms" />
